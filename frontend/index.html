@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Repo Analyzer</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+    
+    <div class="glass-container">
+        <header>
+            <h1>Repo Analyzer</h1>
+            <p>AI-Powered GitHub Repository Exploration</p>
+        </header>
+
+        <section class="ingest-section" id="ingest-section">
+            <div class="input-group">
+                <input type="url" id="repo-url" placeholder="https://github.com/username/repo" required>
+                <button id="ingest-btn">Analyze</button>
+                <button id="clear-repo-btn" title="Clear Repo">🗑️</button>
+            </div>
+            <div id="status-message" class="status-message"></div>
+        </section>
+
+        <section class="chat-section" id="chat-section" style="opacity: 0.5; pointer-events: none;">
+            <div class="chat-box" id="chat-box">
+                <div class="message system-message">
+                    Please analyze a repository to start chatting.
+                </div>
+            </div>
+            <div class="input-group chat-input-group">
+                <input type="text" id="chat-input" placeholder="Ask a question about the codebase...">
+                <button id="send-btn">Send</button>
+                <button id="clear-btn" title="Clear Chat">🗑️</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
