@@ -26,8 +26,10 @@ Repository Context:
 {context_text}
 
 Provide a clear answer using only the information from the repository.
-If the answer is not present in the context, say:
-"I could not find enough information in the repository."
+Follow these formatting rules strictly:
+1. Provide your response in short, concise bullet points.
+2. Keep the answer extremely brief unless the user specifically asks for a "descriptive explanation", "details", or a "long answer" in their question.
+3. If the answer is not present in the context, say: "I could not find enough information in the repository."
 """
     
     result = model.invoke(combined_input)

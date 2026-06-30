@@ -23,8 +23,8 @@ CORS(app)
 
 @app.route("/", methods=["GET"])
 def home():
-    # Serve the index.html from the frontend folder
-    return app.send_static_file('index.html')
+    # Serve the home.html from the frontend folder
+    return app.send_static_file('home.html')
 
 
 # -------------------------------------

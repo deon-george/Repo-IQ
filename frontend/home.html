@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repo-IQ - Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            /* Ensures the background image from style.css still works properly */
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* Background color handled by style.css */
+        }
+        
+        .hero-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1000px;
+            width: 90%;
+            gap: 4rem;
+            z-index: 1;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .hero-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .hero-tag {
+            color: var(--secondary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 600;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            margin-top: 0;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #c7d2fe, #fbcfe8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+            margin-top: 0;
+            max-width: 90%;
+        }
+
+        .hero-desc strong {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .hero-btn {
+            background: linear-gradient(135deg, var(--primary), #4f46e5);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-badge {
+            background: linear-gradient(135deg, var(--primary), #4f46e5);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 220px;
+            height: 180px;
+            flex-shrink: 0;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+        }
+
+        .badge-small {
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .badge-large {
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-card {
+                flex-direction: column;
+                padding: 2rem;
+                gap: 2rem;
+            }
+            .hero-badge {
+                width: 100%;
+                height: auto;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- The animated doodle background from style.css -->
+    <div class="background"></div>
+    
+    <div class="hero-card">
+        <div class="hero-content">
+            <div class="hero-tag">REPO-IQ</div>
+            <h1 class="hero-title">Repo-IQ</h1>
+            <p class="hero-desc">
+                Press the <strong>Start Analyse</strong> button to submit any public GitHub URL, inspect the codebase, and chat with the AI model to explore the architecture.
+            </p>
+            <a href="index.html" style="text-decoration: none;">
+                <button class="hero-btn">Start Analyse</button>
+            </a>
+        </div>
+        
+        <div class="hero-badge">
+            <div class="badge-small">AI Powered</div>
+            <div class="badge-large">Repository<br>Explorer</div>
+        </div>
+    </div>
+    
+    <footer style="text-align: center; padding: 1rem; color: var(--text-muted); font-size: 0.9rem; z-index: 10; margin-top: 1.5rem;">
+        Built by <a href="https://github.com/deon-george" target="_blank" style="color: var(--primary); text-decoration: none;">Deon George</a> | 
+        <a href="https://github.com/dhanush35-lab" target="_blank" style="color: var(--primary); text-decoration: none;">Dhanush M</a> | 
+        <a href="https://github.com/iamkarthik2004" target="_blank" style="color: var(--primary); text-decoration: none;">Karthik Krishnan</a>
+    </footer>
+</body>
+</html>
