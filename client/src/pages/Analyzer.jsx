@@ -39,7 +39,7 @@ function Analyzer() {
     try {
       const response = await axios.post(`${API_URL}/ingest`, { repo_url: repoUrl.trim() });
       if (response.data.success) {
-        showStatus('Repository analyzed successfully! You can now chat.', 'success');
+        showStatus('Analyse complete, you can ask questions about the repo', 'success');
         setIsChatEnabled(true);
         setChatMessages([{ type: 'system', text: 'System: Repository loaded. How can I help you?' }]);
       } else {
@@ -101,70 +101,80 @@ function Analyzer() {
 
   return (
     <>
-      <div className="glass-container">
-        <header>
-          <h1>Repo-IQ</h1>
-          <p>Explore and chat with any GitHub repository.</p>
+      <div className="analyzer-card">
+        <header className="analyzer-header">
+          <h1>Repo Analyzer</h1>
+          <p>AI-Powered GitHub Repository Exploration</p>
         </header>
 
-        <section className="ingestion-section">
-          <div className="input-group">
-            <input 
-              type="text" 
-              id="repo-url" 
-              placeholder="Paste GitHub Repository URL (e.g., https://github.com/user/repo)"
-              value={repoUrl}
-              onChange={(e) => setRepoUrl(e.target.value)}
-            />
-            <button id="ingest-btn" onClick={handleIngest} disabled={isIngesting}>
-              {isIngesting ? 'Analyzing...' : 'Analyze'}
-            </button>
-            <button id="clear-repo-btn" title="Clear Repo" onClick={handleClearRepo}>🗑️</button>
-          </div>
-          <div id="status-message" className={`status-message status-${status.type}`}>
+        <div className="input-row">
+          <input 
+            type="text" 
+            className="input-field"
+            placeholder="https://github.com/username/repo"
+            value={repoUrl}
+            onChange={(e) => setRepoUrl(e.target.value)}
+          />
+          <button className="btn-primary" onClick={handleIngest} disabled={isIngesting}>
+            {isIngesting ? 'Analyzing...' : 'Analyze'}
+          </button>
+          <button className="btn-icon" onClick={handleClearRepo} title="Clear Repo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M9 3V4H4V6H5V19C5 20.1046 5.89543 21 7 21H17C18.1046 21 19 20.1046 19 19V6H20V4H15V3H9ZM7 6H17V19H7V6ZM9 8V17H11V8H9ZM13 8V17H15V8H13Z"></path>
+            </svg>
+          </button>
+        </div>
+        
+        {status.text && (
+          <div style={{ color: status.type === 'error' ? '#f87171' : (status.type === 'success' ? '#10b981' : '#fcd34d'), textAlign: 'center', fontSize: '0.9rem' }}>
             {status.text}
           </div>
-        </section>
+        )}
 
-        <section 
-          id="chat-section" 
-          className="chat-section" 
-          style={{ 
-            opacity: isChatEnabled ? 1 : 0.5, 
-            pointerEvents: isChatEnabled ? 'auto' : 'none' 
-          }}
+        <div 
+          className="chat-area" 
+          ref={chatBoxRef}
         >
-          <div id="chat-box" className="chat-box" ref={chatBoxRef}>
-            {chatMessages.map((msg, idx) => (
-              <div key={idx} className={`message ${msg.type}-message`}>
+          {chatMessages.length === 1 && chatMessages[0].text === 'Please analyze a repository to start chatting.' ? (
+             <div className="chat-placeholder">{chatMessages[0].text}</div>
+          ) : (
+            chatMessages.map((msg, idx) => (
+              <div key={idx} className={msg.type === 'system' ? 'chat-placeholder' : `message ${msg.type}-message`}>
                 {msg.text}
               </div>
-            ))}
-            {isLoading && (
-              <div className="message bot-message">
-                <div className="loading-dots"><span></span><span></span><span></span></div>
-              </div>
-            )}
-          </div>
-          <div className="chat-input-area">
-            <input 
-              type="text" 
-              id="chat-input" 
-              placeholder="Ask a question about the repository..."
-              value={chatInput}
-              onChange={(e) => setChatInput(e.target.value)}
-              onKeyPress={handleKeyPress}
-            />
-            <button id="send-btn" onClick={handleSendMessage}>Send</button>
-            <button id="clear-btn" title="Clear Chat" onClick={handleClearChat}>🗑️</button>
-          </div>
-        </section>
+            ))
+          )}
+          {isLoading && (
+            <div className="message bot-message">
+              <div className="loading-dots"><span></span><span></span><span></span></div>
+            </div>
+          )}
+        </div>
+
+        <div className="input-row" style={{ opacity: isChatEnabled ? 1 : 0.5, pointerEvents: isChatEnabled ? 'auto' : 'none' }}>
+          <input 
+            type="text" 
+            className="input-field"
+            placeholder="Ask a question about the codebase..."
+            value={chatInput}
+            onChange={(e) => setChatInput(e.target.value)}
+            onKeyPress={handleKeyPress}
+          />
+          <button className="btn-primary" onClick={handleSendMessage}>
+            Send
+          </button>
+          <button className="btn-icon" onClick={handleClearChat} title="Clear Chat">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M9 3V4H4V6H5V19C5 20.1046 5.89543 21 7 21H17C18.1046 21 19 20.1046 19 19V6H20V4H15V3H9ZM7 6H17V19H7V6ZM9 8V17H11V8H9ZM13 8V17H15V8H13Z"></path>
+            </svg>
+          </button>
+        </div>
       </div>
 
-      <footer style={{ textAlign: 'center', padding: '1rem', color: 'var(--text-muted)', fontSize: '0.9rem', zIndex: 10, marginTop: '1.5rem' }}>
-        Built by <a href="https://github.com/deon-george" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', textDecoration: 'none' }}>Deon George</a> | 
-        <a href="https://github.com/dhanush35-lab" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', textDecoration: 'none' }}> Dhanush M</a> | 
-        <a href="https://github.com/iamkarthik2004" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', textDecoration: 'none' }}> Karthik Krishnan</a>
+      <footer className="footer">
+        Built by <a href="https://github.com/deon-george" target="_blank" rel="noopener noreferrer">Deon George</a> | 
+        <a href="https://github.com/dhanush35-lab" target="_blank" rel="noopener noreferrer"> Dhanush M</a> | 
+        <a href="https://github.com/iamkarthik2004" target="_blank" rel="noopener noreferrer"> Karthik Krishnan</a>
       </footer>
     </>
   );
